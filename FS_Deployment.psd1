@@ -12,7 +12,7 @@
 RootModule = 'FS_Deployment.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0'  ## Test
+ModuleVersion = '1.1'  ## Test
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
