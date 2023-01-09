@@ -1,6 +1,6 @@
 
 
-function Invoke-FSSqlCreateFuturePartitions  {
+function Invoke-FSSqlCreateFuturePartitionsByDate  {
     <#
 .SYNOPSIS
 
@@ -86,7 +86,7 @@ PS> Get-FSSqlPartitionInfo -FullInstanceName 'EDR1SQL01S003.fs.local\DBA'
         foreach ($pfName in ($PtCfg.Functions.Keys | Where-Object { $_ -ilike 'PtFunc*'} | Sort-Object )) {
             $ptFN = $PtCfg.Functions[$pfName]           # Function Info
             if ( -not ($ptFN.Datatype -match '^.*?DATE.*?') ) {
-                Write-Verbose "Pt Function: $($pfName)  -- Skipped: Not paftitioned by date"   
+                Write-Verbose "Pt Function: $($pfName)  -- Skipped: Not partitioned by date"   
                 continue;
             }
             
@@ -213,7 +213,7 @@ PS> Get-FSSqlPartitionInfo -FullInstanceName 'EDR1SQL01S003.fs.local\DBA'
 if (-not $FSDeploymentIsLoading){
 
     # $results = Invoke-FSSqlCreateFuturePartitionsByDate -InstanceName "PBG1SQL01L205.fs.local" -Database "ModuleAssembly" -Verbose -AvoidPrimary # -IgnoreAfterDate '2040-1-1' 
-     $results = Invoke-FSSqlCreateFuturePartitionsByDate -InstanceName "PBG1SQL01V001.fs.local" -Database "ReliabilityDB" -Verbose -AvoidPrimary # -IgnoreAfterDate '2040-1-1' 
+    $results = Invoke-FSSqlCreateFuturePartitionsByDate -InstanceName "PBG1SQL01L205.fs.local" -Database "ModuleAssembly" -Verbose -AvoidPrimary -DebugLevel 2 # -IgnoreAfterDate '2040-1-1' 
 
     $a = 3
 

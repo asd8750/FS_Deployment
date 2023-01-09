@@ -506,10 +506,11 @@ PS> Get-FSDeploymentConfig -FullInstanceName 'EDR1SQL01S003.fs.local\DBA'
 # $InstanceList_PGT1_ODS = @("PBG1SQL01T114.fs.local", "PBG2SQL01T114.fs.local")
 # $InstanceList_PGT1_ODS_SqlProd= @("PBG1SQL01T114.fs.local", "PBG2SQL01T114.fs.local","PBG1SQL20T111.mfg.fs","PBG2SQL20T111.mfg.fs")
 # #
-$InstanceList_PGT3_ODS_SqlProd  = @("PBG1SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T301.mfg.fs","PBG2SQL20T301.mfg.fs")
-$InstanceList_PGT3_ODS_SqlSpc   = @("PBG1SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T302.mfg.fs","PBG2SQL20T302.mfg.fs")
-$InstanceList_PGT3_ODS_SqlMisc  = @("PBG1SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T303.mfg.fs","PBG2SQL20T303.mfg.fs")
-$InstanceList_PGT3_ODS_SqlPrcData = @("PBG1SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T304.mfg.fs","PBG2SQL20T304.mfg.fs")
+$InstanceList_PGT3_ODS_SqlProd  = @("PBG1SQL01T304.fs.local","PBG2SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T301.mfg.fs","PBG2SQL20T301.mfg.fs")
+$InstanceList_PGT3_ODS_SqlSpc   = @("PBG1SQL01T304.fs.local","PBG2SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T302.mfg.fs","PBG2SQL20T302.mfg.fs")
+$InstanceList_PGT3_ODS_SqlMisc  = @("PBG1SQL01T304.fs.local","PBG2SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T303.mfg.fs","PBG2SQL20T303.mfg.fs")
+$InstanceList_PGT3_ODS_SqlPrcData = @("PBG1SQL01T304.fs.local","PBG2SQL01T304.fs.local","PBG1SQL01T314.fs.local","PBG1SQL20T304.mfg.fs","PBG2SQL20T304.mfg.fs")
+$InstanceList_PGT3_ODS_Only     = @("PBG1SQL01T304.fs.local","PBG2SQL01T304.fs.local","PBG1SQL01T314.fs.local")
 #    
 #$InstanceList_SAP_S820 = @("EDR1SQL01S820.fs.local\EP", "EDR1SQL01S821.fs.local\EP")
 # 
@@ -537,5 +538,5 @@ if (-not $FSDeploymentIsLoading) {
     # $nodes += $InstanceList_PMT1_SqlODS
 
     # Deploy-MirrorEndPointCredAuth -InstanceList $nodes -Command VALIDATE -Verbose -DebugLevel 1
-    Deploy-MirrorEndPointCredAuth -InstanceList $InstanceList_PGT3_ODS_SqlProd -Command VALIDATE -Verbose -DebugLevel 1
+    Deploy-MirrorEndPointCredAuth -InstanceList $InstanceList_PGT3_ODS_Only -Command VALIDATE -Verbose -DebugLevel 1
 }
