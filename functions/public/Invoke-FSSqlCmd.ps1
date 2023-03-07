@@ -196,7 +196,7 @@ FROM sys.database_permissions DPM
 "@
 
 #$BugQry
-$QryResults = Invoke-FSSqlCmd -Instance 'PBG1SQL01T114.fs.local' -Database 'ODS' -GetSchema -CaptureMsgs -Query $BugQry
+#$QryResults = Invoke-FSSqlCmd -Instance 'PBG1SQL01T114.fs.local' -Database 'ODS' -GetSchema -CaptureMsgs -Query $BugQry
 $a = 3
 }
 

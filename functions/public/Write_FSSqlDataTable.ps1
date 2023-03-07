@@ -42,11 +42,11 @@ function Write-FSSqlDataTable {
 
             foreach ($colName in $Columns) {
                 $newCMap = New-Object System.Data.SqlClient.SqlBulkCopyColumnMapping($colName, $colName);
-                $bulkCopy.ColumnMappings.Add($newCMap);
+                $result = $bulkCopy.ColumnMappings.Add($newCMap);
             }
 
-            $bulkCopy.WriteToServer($DataTable);
-            Write-Output $Database.Rows.Count
+            $result = $bulkCopy.WriteToServer($DataTable);
+            #Write-Output $Database.Rows.Count
             $tran.Commit();
         }
 
