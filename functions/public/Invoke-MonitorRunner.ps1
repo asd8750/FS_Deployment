@@ -272,6 +272,7 @@ function Invoke-MonitorRunner {
                                 if ($null -eq ($RepoTableSchema | where-object ColumnName -eq $Col.ColumnName)) {
                                     $NewColCount += 1  # Increment new column counter
                                     $sqlAddColumns = $sqlAddColumns + " [$($Col.ColumnName)] $($col.SqlDef) NULL,"
+
                                 }
                             } 
 
@@ -358,5 +359,8 @@ function Invoke-MonitorRunner {
 #
 
 if (-not $FSDeploymentIsLoading) {
-    #Invoke-MonitorRunner -RepoInstance "EDR1SQL01S004.fs.local\DBA" -RepoDatabase RepoInstanceInfo -RepoSchema MonitorData -ListName DBInfoPerDB 
+
+    $TList = 'EDR1SQL01S004.fs.local\DBA'
+    Invoke-MonitorRunner -RepoInstance "EDR1SQL01S004.fs.local\DBA" -RepoDatabase RepoInstanceInfo -RepoSchema MonitorData -ListName DBInfo `
+            -TargetInstanceList $TList
 }

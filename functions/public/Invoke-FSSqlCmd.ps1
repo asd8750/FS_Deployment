@@ -84,41 +84,45 @@ function Invoke-FSSqlCmd {
                         ColumnSize = $_.ColumnSize
                         Precision = $_.NumericPrecision
                         Scale = $_.NumericScale
-                        ProvDataType = "System."+$_.ProviderSpecificDataType.Name -replace 'Sql',''
+                        ProvDataType = "System."+$_.ProviderSpecificDataType.Name -replace "Sql",""
                         DataType = $_.DataTypeName
                         SqlDef =  $_.DataTypeName
                     }
                     switch ($CInfo.DataType) {
-                        'decimal' {$CInfo.SqlDef = "decimal($($CInfo.Precision),$($CInfo.Scale))"}
-                        'numeric' {$CInfo.SqlDef = "numeric($($CInfo.Precision),$($CInfo.Scale))"}
-                        'float' {$CInfo.SqlDef = "float($($CInfo.Precision))"}
-                        'real' {$CInfo.SqlDef = "real"}
-                        'varchar' { if ($CInfo.ColumnSize -le 8000) {
+                     
+                        "decimal" {$CInfo.SqlDef = "decimal($($CInfo.Precision),$($CInfo.Scale))"; break}
+                        "numeric" {$CInfo.SqlDef = "numeric($($CInfo.Precision),$($CInfo.Scale))"; break}
+                        "float" {$CInfo.SqlDef = "float($($CInfo.Precision))"; break}
+                        "real" {$CInfo.SqlDef = "real"; break}
+                        "varchar" { if ($CInfo.ColumnSize -le 8000) {
                                 $CInfo.SqlDef = "varchar($($CInfo.ColumnSize))" 
                             } else {
                                 $CInfo.SqlDef = "varchar(MAX)" 
                             }
+                            break
                         }
-                        'char' { $CInfo.SqlDef = "char($($CInfo.ColumnSize))" }
-                        'nchar' { $CInfo.SqlDef = "char($($CInfo.ColumnSize))" }
-                        'nvarchar' { if ($CInfo.ColumnSize -le 4000) {
+                        "char" { $CInfo.SqlDef = "char($($CInfo.ColumnSize))"; break }
+                        "nchar" { $CInfo.SqlDef = "char($($CInfo.ColumnSize))" ; break}
+                        "nvarchar" { if ($CInfo.ColumnSize -le 4000) {
                                 $CInfo.SqlDef = "varchar($($CInfo.ColumnSize))" 
                             } else {
                                 $CInfo.SqlDef = "varchar(MAX)" 
                             }
+                            break
                         }
-                        'varbinary' { if ($CInfo.ColumnSize -le 8000) {
+                        "varbinary" { if ($CInfo.ColumnSize -le 8000) {
                                 $CInfo.SqlDef = "varbinary($($CInfo.ColumnSize))" 
                             } else {
                                 $CInfo.SqlDef = "varbinary(MAX)" 
-                            }
+                            }; break
                         }
-                        'binary' {$CInfo.SqlDef = "binary($($CInfo.ColumnSize))"}
-                        'datetime2' {$CInfo.SqlDef = "datetime2($($CInfo.Scale))"}
-                        'datetimeoffset' {$CInfo.SqlDef = "datetimeoffset($($CInfo.Scale))"}
-                        'rowversion' {$CInfo.SqlDef = "bigint" }
-                        'timestamp' {$CInfo.SqlDef = "bigint" }
-                        }
+                        "binary" {$CInfo.SqlDef = "binary($($CInfo.ColumnSize))"; break}
+                        "datetime2" {$CInfo.SqlDef = "datetime2($($CInfo.Scale))"; break}
+                        "datetimeoffset" {$CInfo.SqlDef = "datetimeoffset($($CInfo.Scale))"; break}
+                        "rowversion" {$CInfo.SqlDef = "bigint" ; break}
+                        "timestamp" {$CInfo.SqlDef = "bigint" ; break}
+
+                    }
                     $Results.Schema += $CInfo
                 }
             }
